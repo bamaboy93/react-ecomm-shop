@@ -4,6 +4,7 @@ import ItemDetails from "./views/ItemDetails/ItemDetails";
 import Home from "./views/Home";
 import Checkout from "./views/Checkout/Checkout";
 import Confirmation from "./views/Confirmation/Confirmation";
+import Layout from "./views/Layout/Layout";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -17,17 +18,17 @@ const ScrollToTop = () => {
 
 export default function App() {
   return (
-    <div className="app">
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Home />} />
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
           <Route path="/item/:itemId" element={<ItemDetails />} />
           <Route path="/checkout" element={<Checkout />}>
-            <Route path="/success" element={<Confirmation />} />
+            <Route path="checkout/success" element={<Confirmation />} />
           </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
