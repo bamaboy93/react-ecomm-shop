@@ -7,12 +7,12 @@ export const Wrapper = styled(Box)({
   alignItems: "center",
   width: "100%",
   height: "60px",
-  backgroundColor: "rgba(255, 255, 255, 0.95)",
+  backgroundColor: "rgba(255, 255, 255, 0.80)",
   color: "black",
   position: "fixed",
   top: "0",
   left: "0",
-  zIndex: "1",
+  zIndex: "99",
 });
 
 export const NavBar = styled(Box)({

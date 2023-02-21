@@ -1,12 +1,11 @@
-// import { useDispatch, useSelector } from "react-redux";
-import { Badge, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import {
   PersonOutline,
-  ShoppingBagOutlined,
-  MenuOutlined,
+  // MenuOutlined,
   SearchOutlined,
 } from "@mui/icons-material";
 import { Actions, Logo, NavBar, Wrapper } from "./Appbar.styled";
+import Cart from "../../../components/Cart/Cart";
 
 export default function Appbar() {
   return (
@@ -17,33 +16,15 @@ export default function Appbar() {
           <IconButton sx={{ color: "black" }}>
             <SearchOutlined fontSize="large" />
           </IconButton>
+
+          <Cart />
+
           <IconButton sx={{ color: "black" }}>
             <PersonOutline fontSize="large" />
           </IconButton>
-          <Badge
-            // badgeContent={cart.length}
-            color="secondary"
-            // invisible={cart.length === 0}
-            sx={{
-              "& .MuiBadge-badge": {
-                right: 5,
-                top: 5,
-                padding: "0 4px",
-                height: "14px",
-                minWidth: "13px",
-              },
-            }}
-          >
-            <IconButton
-              //   onClick={() => dispatch(setIsCartOpen({}))}
-              sx={{ color: "black" }}
-            >
-              <ShoppingBagOutlined fontSize="large" />
-            </IconButton>
-          </Badge>
-          <IconButton sx={{ color: "black" }}>
+          {/* <IconButton sx={{ color: "black" }}>
             <MenuOutlined fontSize="large" />
-          </IconButton>
+          </IconButton> */}
         </Actions>
       </NavBar>
     </Wrapper>
