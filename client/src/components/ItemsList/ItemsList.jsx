@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { Box, Tabs, Tab, Typography, useMediaQuery } from "@mui/material";
 import Item from "../Item/Item";
 
-import { selectItems } from "../../redux/selectors";
-
-export default function ItemsList() {
+export default function ItemsList({ items }) {
   const [value, setValue] = useState("all");
-  const items = useSelector(selectItems);
+
   const breakPoint = useMediaQuery("(min-width:600px)");
 
   const handleChange = (event, newValue) => {
@@ -31,7 +28,7 @@ export default function ItemsList() {
       </Typography>
       <Tabs
         textColor="primary"
-        indicatorColor="primary"
+        indicatorColor="secondary"
         value={value}
         onChange={handleChange}
         centered
@@ -51,7 +48,7 @@ export default function ItemsList() {
       <Box
         margin="0 auto"
         display="grid"
-        gridTemplateColumns="repeat(auto-fill, 300px)"
+        gridTemplateColumns="repeat(auto-fill, 280px)"
         justifyContent="space-around"
         rowGap="20px"
         columnGap="1.33%"

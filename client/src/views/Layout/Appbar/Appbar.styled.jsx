@@ -16,7 +16,7 @@ export const Wrapper = styled(Box)({
 });
 
 export const NavBar = styled(Box)({
-  width: "80%",
+  width: "90%",
   margin: "auto",
   display: "flex",
   justifyContent: "space-between",

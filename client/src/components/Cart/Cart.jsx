@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Box,
   Badge,
@@ -11,9 +12,17 @@ import {
 } from "@mui/material";
 import { ShoppingBagOutlined, Close, Remove, Add } from "@mui/icons-material";
 import { CartBox, Header, Wrapper } from "./Cart.styled";
+import { selectCart } from "../../redux/selectors";
+import {
+  removeFromCart,
+  decreaseCount,
+  increaseCount,
+} from "../../redux/actions";
 
 export default function Cart() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cart = useSelector(selectCart);
   const [state, setState] = useState({
     anchor: "right",
     right: false,
@@ -30,12 +39,21 @@ export default function Cart() {
     setState({ ...state, [anchor]: open });
   };
 
+  const totalPrice = cart.reduce((total, item) => {
+    return total + item.count * item.attributes.price;
+  }, 0);
+
   return (
     <>
       <Badge
-        // badgeContent={cart.length}
+        badgeContent={cart.length}
         color="secondary"
-        // invisible={cart.length === 0}
+        invisible={cart.length === 0}
+        sx={{
+          "& .MuiBadge-badge": {
+            top: 5,
+          },
+        }}
       >
         <IconButton
           onClick={toggleDrawer(state.anchor, true)}
@@ -57,55 +75,53 @@ export default function Cart() {
             </IconButton>
           </Header>
           <Box>
-            {[1, 2, 3].map((item) => (
-              <Box key={1}>
+            {cart.map((item) => (
+              <Box key={`${item.attributes.name}-${item.id}`}>
                 <Wrapper>
                   <Box flex="1 1 40%">
-                    {/* <img
+                    <img
                       alt={item?.name}
                       width="123px"
                       height="164px"
-                      src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-                    /> */}
+                      src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                    />
                   </Box>
                   <Box flex="1 1 60%">
                     <Wrapper>
                       <Typography fontWeight="bold">
-                        {/* {item.attributes.name} */}
+                        {item.attributes.name}
                       </Typography>
                       <IconButton
-                      // onClick={() =>
-                      //   dispatch(removeFromCart({ id: item.id }))
-                      // }
+                        onClick={() =>
+                          dispatch(removeFromCart({ id: item.id }))
+                        }
                       >
                         <Close />
                       </IconButton>
                     </Wrapper>
-                    {/* <Typography>{item.attributes.shortDescription}</Typography> */}
+                    <Typography>{item.attributes.shortDescription}</Typography>
                     <Wrapper>
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        border="1.5px solid red"
-                      >
+                      <Box display="flex" alignItems="center">
                         <IconButton
-                        //   onClick={() =>
-                        //     dispatch(decreaseCount({ id: item.id }))
-                        //   }
+                          color="secondary"
+                          onClick={() =>
+                            dispatch(decreaseCount({ id: item.id }))
+                          }
                         >
                           <Remove />
                         </IconButton>
-                        <Typography>1</Typography>
+                        <Typography fontWeight="bold">{item.count}</Typography>
                         <IconButton
-                        //   onClick={() =>
-                        //     dispatch(increaseCount({ id: item.id }))
-                        //   }
+                          color="secondary"
+                          onClick={() =>
+                            dispatch(increaseCount({ id: item.id }))
+                          }
                         >
                           <Add />
                         </IconButton>
                       </Box>
                       <Typography fontWeight="bold">
-                        {/* ${item.attributes.price} */}
+                        $ {item.attributes.price}
                       </Typography>
                     </Wrapper>
                   </Box>
@@ -119,16 +135,16 @@ export default function Cart() {
           <Box m="20px 0">
             <Wrapper>
               <Typography fontWeight="bold">SUBTOTAL</Typography>
-              <Typography fontWeight="bold">$20</Typography>
+              <Typography fontWeight="bold">$ {totalPrice}</Typography>
             </Wrapper>
             <Button
               sx={{
-                backgroundColor: "grey",
-                color: "white",
-                borderRadius: 0,
+                backgroundColor: "secondary.light",
+                color: "primary.main",
+                fontWeight: "bold",
                 minWidth: "100%",
-                padding: "20px 40px",
-                m: "20px 0",
+                padding: "20px 0",
+                marginTop: 3,
               }}
               onClick={() => {
                 navigate("/checkout");

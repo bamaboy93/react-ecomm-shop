@@ -1,19 +1,23 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getItems } from "../../redux/operations";
+import { useGetItemsQuery } from "../../redux/items-slice";
 import ItemsList from "../../components/ItemsList/ItemsList";
 import MainCarousel from "../../components/MainCarousel/MainCrousel";
+import { LinearProgress } from "@mui/material";
 
 export default function Home() {
-  const dispatch = useDispatch();
+  const { data, isLoading } = useGetItemsQuery();
 
-  useEffect(() => {
-    dispatch(getItems());
-  }, [dispatch]);
   return (
     <>
       <MainCarousel />
-      <ItemsList />
+      {data && (
+        <>
+          {isLoading ? (
+            <LinearProgress color="secondary" />
+          ) : (
+            <ItemsList items={data.data} />
+          )}
+        </>
+      )}
     </>
   );
 }
