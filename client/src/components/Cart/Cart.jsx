@@ -57,7 +57,7 @@ export default function Cart() {
       >
         <IconButton
           onClick={toggleDrawer(state.anchor, true)}
-          sx={{ color: "black", p: 0 }}
+          sx={{ color: "primary.light", p: 0 }}
         >
           <ShoppingBagOutlined fontSize="large" />
         </IconButton>

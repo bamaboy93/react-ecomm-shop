@@ -10,9 +10,8 @@ export default function Footer() {
         justifyContent="space-between"
         flexWrap="wrap"
         rowGap="30px"
-        columnGap="clamp(20px, 30px, 40px)"
       >
-        <Box width="clamp(20%, 30%, 40%)">
+        <Box width="150px">
           <Typography
             variant="h4"
             fontWeight="bold"
@@ -31,40 +30,41 @@ export default function Footer() {
           <Typography variant="h4" fontWeight="bold">
             About Us
           </Typography>
-          <Typography>Careers</Typography>
-          <Typography>Our Stores</Typography>
-          <Typography>Terms & Conditions</Typography>
-          <Typography>Privacy Policy</Typography>
+          <Item href="#">Careers</Item>
+          <Item href="#">Our Stores</Item>
+          <Item href="#">Terms & Conditions</Item>
+          <Item href="#">Privacy Policy</Item>
         </Stack>
 
-        <Stack spacing={3}>
+        <Stack spacing={3} width="150px">
           <Typography variant="h4" fontWeight="bold">
             Customer Care
           </Typography>
-          <ActionLink herf="/">Track Your Order</ActionLink>
-          <ActionLink herf="#">Corporate & Bulk Purchasing</ActionLink>
-          <ActionLink herf="#">Returns & Refunds</ActionLink>
-          <ActionLink herf="#">Help Center</ActionLink>
+          <Item href="#">Track Your Order</Item>
+          <Item href="#">Corporate & Bulk Purchasing</Item>
+          <Item href="#">Returns & Refunds</Item>
+          <Item href="#">Help Center</Item>
         </Stack>
 
-        <Stack spacing={3}>
+        <Stack spacing={3} width="122px">
           <Typography variant="h4" fontWeight="bold">
             Contact Us
           </Typography>
           <Typography>50 Blvd, Washington, DC 10501</Typography>
-          <Typography sx={{ wordWrap: "break-word" }}>
+          <Item href="mailto:mail@gmail.com" sx={{ wordWrap: "break-word" }}>
             mail@gmail.com
-          </Typography>
-          <Typography>(222)333-4444</Typography>
+          </Item>
+          <Item href="tel:2223334444">(222)333-4444</Item>
         </Stack>
       </Box>
     </Box>
   );
 }
 
-const ActionLink = styled(Link)(({ theme }) => ({
+const Item = styled(Link)(({ theme }) => ({
   textDecoration: "none",
-  marginBottom: "30px",
-
-  color: `${theme.palette.secondary.main}`,
+  transition: "color 250ms ease-in",
+  "&:hover": {
+    color: theme.palette.secondary.main,
+  },
 }));
