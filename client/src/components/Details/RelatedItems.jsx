@@ -12,14 +12,14 @@ export default function RelatedItmes() {
       </Typography>
       {data && (
         <Box
-          mt="20px"
+          mt="30px"
           display="flex"
+          justifyContent="center"
           flexWrap="wrap"
-          columnGap="1.33%"
-          justifyContent="space-between"
+          gap="20px"
         >
-          {data.data.slice(0, 4).map((item, i) => (
-            <Item key={`${item.name}-${i}`} item={item} />
+          {data.data.slice(5, 9).map((item) => (
+            <Item key={item.id} item={item} />
           ))}
         </Box>
       )}

@@ -81,9 +81,14 @@ export default function Cart() {
                   </Box>
                   <Box flex="1 1 60%">
                     <Wrapper>
-                      <Typography fontWeight="bold">
-                        {item.attributes.name}
-                      </Typography>
+                      <Box>
+                        <Typography fontWeight="bold" mb="10px">
+                          {item.attributes.name}
+                        </Typography>
+                        <Typography fontWeight="bold">
+                          Size: {item.size}
+                        </Typography>
+                      </Box>
                       <IconButton
                         onClick={() =>
                           dispatch(removeFromCart({ id: item.id }))

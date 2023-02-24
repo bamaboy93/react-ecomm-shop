@@ -1,11 +1,12 @@
-import { Box, Typography, Link, styled, Stack } from "@mui/material";
+import { Box, Typography, Link, styled, Stack, Divider } from "@mui/material";
 
 export default function Footer() {
   return (
-    <Box marginTop="70px" padding="40px 0" backgroundColor="neutral.light">
+    <Box marginTop="70px" pt="40px" backgroundColor="neutral.light">
       <Box
         width="77%"
         margin="auto"
+        mb="20px"
         display="flex"
         justifyContent="space-between"
         flexWrap="wrap"
@@ -56,6 +57,12 @@ export default function Footer() {
           </Item>
           <Item href="tel:2223334444">(222)333-4444</Item>
         </Stack>
+      </Box>
+      <Divider />
+      <Box display="flex" justifyContent="center">
+        <Typography variant="body2" p="10px 0">
+          All Rights Reserved © 2023 STORE
+        </Typography>
       </Box>
     </Box>
   );

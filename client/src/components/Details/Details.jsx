@@ -5,7 +5,7 @@ import RelatedItmes from "./RelatedItems";
 
 export default function Details({ item }) {
   return (
-    <Box width="80%" m="80px auto">
+    <Box width="90%" m="70px auto">
       <Box
         sx={{
           display: "flex",

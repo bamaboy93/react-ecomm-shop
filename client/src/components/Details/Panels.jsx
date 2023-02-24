@@ -18,10 +18,14 @@ export default function Panels({ item }) {
       </Box>
       <Box display="flex" flexWrap="wrap" gap="15px">
         {value === "description" && (
-          <Typography>{item?.attributes?.longDescr}</Typography>
+          <Typography sx={{ fontSize: 14 }}>
+            {item?.attributes?.longDescr}
+          </Typography>
         )}
         {value === "reviews" && (
-          <Typography>There are no reviews for this product yet.</Typography>
+          <Typography sx={{ fontSize: 14 }}>
+            There are no reviews for this product yet.
+          </Typography>
         )}
       </Box>
     </>
