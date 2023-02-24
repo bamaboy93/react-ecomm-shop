@@ -15,12 +15,9 @@ import {
 import { MenuRounded, Close } from "@mui/icons-material";
 
 export default function Menu() {
-  const [state, setState] = useState({
-    left: false,
-  });
-  const anchor = "left";
+  const [open, setOpen] = useState(false);
 
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = () => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -28,7 +25,7 @@ export default function Menu() {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    setOpen(!open);
   };
 
   const items = [
@@ -48,20 +45,16 @@ export default function Menu() {
           color: "primary.light",
           marginRight: { xs: 2, sm: 4, lg: 6 },
         }}
-        onClick={toggleDrawer(anchor, true)}
+        onClick={toggleDrawer()}
       >
         <MenuRounded fontSize="large" />
       </IconButton>
 
-      <Drawer
-        anchor={anchor}
-        open={state[anchor]}
-        onClose={toggleDrawer(anchor, false)}
-      >
+      <Drawer anchor="left" open={open} onClose={toggleDrawer()}>
         <Box
           sx={{ width: 300 }}
-          onClick={toggleDrawer(anchor, false)}
-          onKeyDown={toggleDrawer(anchor, false)}
+          onClick={toggleDrawer()}
+          onKeyDown={toggleDrawer()}
         >
           <Box p="20px" display="flex" justifyContent="space-between">
             <Stack spacing={2}>
@@ -73,7 +66,7 @@ export default function Menu() {
             </Stack>
             <IconButton
               sx={{ alignSelf: "flex-start" }}
-              onClick={toggleDrawer(state.anchor, false)}
+              onClick={toggleDrawer()}
             >
               <Close />
             </IconButton>

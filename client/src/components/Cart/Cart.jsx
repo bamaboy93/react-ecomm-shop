@@ -20,15 +20,12 @@ import {
 } from "../../redux/actions";
 
 export default function Cart() {
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector(selectCart);
-  const [state, setState] = useState({
-    anchor: "right",
-    right: false,
-  });
 
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = () => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -36,7 +33,7 @@ export default function Cart() {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    setOpen(!open);
   };
 
   const totalPrice = cart.reduce((total, item) => {
@@ -56,21 +53,17 @@ export default function Cart() {
         }}
       >
         <IconButton
-          onClick={toggleDrawer(state.anchor, true)}
+          onClick={toggleDrawer()}
           sx={{ color: "primary.light", p: 0 }}
         >
           <ShoppingBagOutlined fontSize="large" />
         </IconButton>
       </Badge>
-      <Drawer
-        anchor={state.anchor}
-        open={state[state.anchor]}
-        onClose={toggleDrawer(state.anchor, false)}
-      >
+      <Drawer anchor="right" open={open} onClose={toggleDrawer()}>
         <CartBox>
           <Header>
             <Typography variant="h3">SHOPPING BAG</Typography>
-            <IconButton onClick={toggleDrawer(state.anchor, false)}>
+            <IconButton onClick={toggleDrawer()}>
               <Close />
             </IconButton>
           </Header>

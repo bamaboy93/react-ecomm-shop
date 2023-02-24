@@ -9,7 +9,6 @@ import {
 
 const initialState = {
   isLoading: false,
-  isCartOpen: false,
   cart: [],
 };
 

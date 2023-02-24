@@ -7,7 +7,10 @@ export const itemsApi = createApi({
     getItems: builder.query({
       query: () => `/items?populate=image`,
     }),
+    getItem: builder.query({
+      query: (itemId) => `/items/${itemId}?populate=image`,
+    }),
   }),
 });
 
-export const { useGetItemsQuery } = itemsApi;
+export const { useGetItemsQuery, useGetItemQuery } = itemsApi;
