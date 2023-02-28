@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 export const Price = styled.span`
   font-weight: bold;
   position: relative;
+  z-index: 33;
+
   :before {
     width: calc(100%);
     background-color: ${(props) => props.theme.palette.secondary.extralight};

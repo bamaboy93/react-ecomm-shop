@@ -1,8 +1,16 @@
-import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import {
+  Typography,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  IconButton,
+} from "@mui/material";
+import { Favorite, Share } from "@mui/icons-material";
 import { Price } from "./Item.styled";
 
-export default function Item({ item, width }) {
+export default function Item({ item }) {
   const navigate = useNavigate();
 
   const { price, name, image } = item.attributes;
@@ -17,29 +25,37 @@ export default function Item({ item, width }) {
   } = image;
 
   return (
-    <Box width={width}>
-      <Box>
-        <img
-          alt={name}
-          width="280px"
-          height="400px"
-          src={`http://localhost:1337${url}`}
-          onClick={() => navigate(`/item/${item.id}`)}
-          style={{ cursor: "pointer", display: "block" }}
-        />
-        <Box
-          position="absolute"
-          bottom="10%"
-          left="0"
-          width="100%"
-          padding="0 5%"
-        ></Box>
-      </Box>
-
-      <Box sx={{ mt: 2 }}>
+    <Card>
+      <CardMedia
+        component="img"
+        width="100%"
+        height="360px"
+        image={`http://localhost:1337${url}`}
+        alt={name}
+        onClick={() => navigate(`/item/${item.id}`)}
+        sx={{ cursor: "pointer" }}
+      />
+      <CardContent>
         <Typography sx={{ fontSize: 14 }}>{name}</Typography>
+      </CardContent>
+      <CardContent
+        sx={{
+          pt: 0,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Price>$ {price}</Price>
-      </Box>
-    </Box>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <Favorite />
+          </IconButton>
+          <IconButton aria-label="share">
+            <Share />
+          </IconButton>
+        </CardActions>
+      </CardContent>
+    </Card>
   );
 }

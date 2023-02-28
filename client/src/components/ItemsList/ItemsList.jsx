@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, Tabs, Tab, Typography, useMediaQuery } from "@mui/material";
 import Item from "../Item/Item";
+import { Wrapper } from "./ItemsList.styled";
 
 export default function ItemsList({ items }) {
   const [value, setValue] = useState("all");
@@ -45,14 +46,7 @@ export default function ItemsList({ items }) {
         <Tab label="BEST SELLERS" value="bestSellers" />
         <Tab label="TOP RATED" value="topRated" />
       </Tabs>
-      <Box
-        margin="0 auto"
-        display="grid"
-        gridTemplateColumns="repeat(auto-fill, 280px)"
-        justifyContent="space-around"
-        rowGap="20px"
-        columnGap="1.33%"
-      >
+      <Wrapper>
         {value === "all" &&
           items.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
@@ -69,7 +63,7 @@ export default function ItemsList({ items }) {
           topRatedItems.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
-      </Box>
+      </Wrapper>
     </Box>
   );
 }

@@ -29,14 +29,12 @@ export default function MainCarousel() {
             margin={isNonMobile ? undefined : "0 auto"}
             maxWidth={isNonMobile ? undefined : "240px"}
           >
-            <Typography sx={{ color: `${theme.palette.secondary.light}` }}>
-              NEW ITEMS
-            </Typography>
+            <Typography sx={{ color: "secondary.light" }}>NEW ITEMS</Typography>
             <Typography variant="h1">Summer Sale</Typography>
             <Typography
               sx={{
                 textDecoration: "underline",
-                color: `${theme.palette.secondary.light}`,
+                color: "secondary.light",
                 fontWeight: "bold",
               }}
             >

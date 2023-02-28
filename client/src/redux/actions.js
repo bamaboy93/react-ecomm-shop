@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 
-export const addToCart = createAction("ADD_ITEM");
-export const removeFromCart = createAction("REMOVE_ITEM");
-export const increaseCount = createAction("INCREASE");
-export const decreaseCount = createAction("DECREASE");
+export const addToCart = createAction("cart/AddItem");
+export const removeFromCart = createAction("cart/RemoveItem");
+export const increaseCount = createAction("cart/Increase");
+export const decreaseCount = createAction("cart/Decrease");

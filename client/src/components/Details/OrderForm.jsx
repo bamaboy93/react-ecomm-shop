@@ -1,5 +1,5 @@
-import { useState, forwardRef } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Button,
@@ -10,29 +10,51 @@ import {
   FormControl,
   MenuItem,
 } from "@mui/material";
-
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import { Remove, Add } from "@mui/icons-material";
+import { selectCart } from "../../redux/selectors";
 import { addToCart } from "../../redux/actions";
+import Notification from "../Notifiaction/Notification";
 
 export default function OrderForm({ item }) {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const cart = useSelector(selectCart);
+  const [message, setMessage] = useState({
+    open: false,
+    severity: "",
+    text: "",
+  });
   const [size, setSize] = useState("");
   const [count, setCount] = useState(1);
 
-  const add = (value) => {
+  const handleAddItem = (value) => {
+    const id = cart.map((product) => product.id);
+    if (id.includes(value.item.id)) {
+      setMessage((message) => ({
+        ...message,
+        open: true,
+        severity: "error",
+        text: "Item has already been added to the cart!",
+      }));
+      return;
+    }
     dispatch(addToCart(value));
-    setOpen(true);
+    setMessage((message) => ({
+      ...message,
+      open: true,
+      severity: "success",
+      text: "Item successfully added to cart!",
+    }));
   };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
-    setOpen(false);
+    setMessage((message) => ({
+      ...message,
+      open: false,
+      text: "",
+    }));
   };
 
   const handleChangeSize = (event) => {
@@ -76,20 +98,12 @@ export default function OrderForm({ item }) {
           sx={{
             padding: "10px 40px",
           }}
-          onClick={() => add({ item: { ...item, count, size } })}
+          onClick={() => handleAddItem({ item: { ...item, count, size } })}
         >
           ADD TO CART
         </Button>
       </Box>
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Item successfully added to cart!
-        </Alert>
-      </Snackbar>
+      <Notification message={message} handleClose={handleClose} />
     </>
   );
 }
-
-const Alert = forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
