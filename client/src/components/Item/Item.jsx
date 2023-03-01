@@ -25,7 +25,7 @@ export default function Item({ item }) {
   } = image;
 
   return (
-    <Card>
+    <Card sx={{ width: 280 }}>
       <CardMedia
         component="img"
         width="100%"

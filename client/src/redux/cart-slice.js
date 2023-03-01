@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import {
   addToCart,
@@ -8,7 +10,6 @@ import {
 } from "./actions";
 
 const initialState = {
-  isLoading: false,
   cart: [],
 };
 
@@ -18,13 +19,9 @@ const cartSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(addToCart, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
         state.cart = [...state.cart, action.payload.item];
       })
       .addCase(removeFromCart, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
         state.cart = state.cart.filter((item) => item.id !== action.payload.id);
       })
       .addCase(increaseCount, (state, action) => {
@@ -45,4 +42,9 @@ const cartSlice = createSlice({
       }),
 });
 
-export const cartReducer = cartSlice.reducer;
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+export const cartReducer = persistReducer(persistConfig, cartSlice.reducer);

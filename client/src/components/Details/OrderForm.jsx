@@ -20,7 +20,7 @@ export default function OrderForm({ item }) {
   const cart = useSelector(selectCart);
   const [message, setMessage] = useState({
     open: false,
-    severity: "",
+    severity: "success",
     text: "",
   });
   const [size, setSize] = useState("");
@@ -41,7 +41,7 @@ export default function OrderForm({ item }) {
     setMessage((message) => ({
       ...message,
       open: true,
-      severity: "success",
+
       text: "Item successfully added to cart!",
     }));
   };
@@ -84,11 +84,14 @@ export default function OrderForm({ item }) {
       </FormControl>
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <Box display="flex" alignItems="center" mr="20px" p="2px 5px">
-          <IconButton onClick={() => setCount(Math.max(count - 1, 0))}>
+          <IconButton
+            color="secondary"
+            onClick={() => setCount(Math.max(count - 1, 0))}
+          >
             <Remove />
           </IconButton>
           <Typography sx={{ p: "0 5px" }}>{count}</Typography>
-          <IconButton onClick={() => setCount(count + 1)}>
+          <IconButton color="secondary" onClick={() => setCount(count + 1)}>
             <Add />
           </IconButton>
         </Box>

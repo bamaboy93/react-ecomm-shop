@@ -9,10 +9,10 @@ export const ButtonToTop = styled(Button)(({ theme }) => ({
   padding: 10,
   minWidth: 0,
   color: theme.palette.common.white,
-  backgroundColor: theme.palette.secondary.light,
+  backgroundColor: theme.palette.secondary.main,
   transition: "background-color 250ms ease-in",
   "&:hover": {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.light,
   },
 
   [theme.breakpoints.down("sm")]: {

@@ -5,8 +5,8 @@ export const itemsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:1337/api" }),
   endpoints: (builder) => ({
     getItems: builder.query({
-      query: () =>
-        `/items?populate=image&pagination[page]=1&pagination[pageSize]=12`,
+      query: (page) =>
+        `/items?populate=image&pagination[page]=${page}&pagination[pageSize]=12`,
     }),
     getItem: builder.query({
       query: (itemId) => `/items/${itemId}?populate=image`,

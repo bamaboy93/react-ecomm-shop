@@ -2,7 +2,7 @@ import { Box, Typography, Link, styled, Stack, Divider } from "@mui/material";
 
 export default function Footer() {
   return (
-    <Box marginTop="70px" pt="40px" backgroundColor="neutral.light">
+    <Box marginTop="64px" pt="40px" backgroundColor="neutral.light">
       <Box
         width="77%"
         margin="auto"

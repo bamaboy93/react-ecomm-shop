@@ -23,7 +23,7 @@ export default function ItemsList({ items }) {
   );
 
   return (
-    <Box width="80%" margin="80px auto">
+    <Box width="80%" margin="64px auto">
       <Typography variant="h3" textAlign="center">
         Our Featured <b>Products</b>
       </Typography>
