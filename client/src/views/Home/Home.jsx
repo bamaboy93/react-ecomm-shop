@@ -6,12 +6,15 @@ import MainCarousel from "../../components/MainCarousel/MainCrousel";
 import Loader from "../../components/Loader/Loader";
 import ButtonUp from "../../components/ButtonUp/ButtonUp";
 import MainPagination from "../../components/MainPagination/MainPagination";
+import Subscribe from "../../components/Subscribe/Subscribe";
 
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = searchParams.get("page");
-  const [page, setPage] = useState(Number(currentPage));
-  const { data, isLoading } = useGetItemsQuery(page);
+  const [page, setPage] = useState(
+    Number(currentPage) > 1 ? Number(currentPage) : 1
+  );
+  const { data, isLoading, isFetching } = useGetItemsQuery(page);
 
   useEffect(() => {
     searchParams.set("page", page);
@@ -27,7 +30,15 @@ export default function Home() {
     <>
       <MainCarousel />
 
-      {data && <>{isLoading ? <Loader /> : <ItemsList items={data.data} />}</>}
+      {data && (
+        <>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <ItemsList items={data.data} isLoading={isFetching} />
+          )}
+        </>
+      )}
       {data && (
         <MainPagination
           handleChangePage={handleChangePage}
@@ -35,6 +46,7 @@ export default function Home() {
           totalPages={data.meta.pagination.pageCount}
         />
       )}
+      <Subscribe />
 
       <ButtonUp />
     </>

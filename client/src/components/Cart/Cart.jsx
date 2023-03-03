@@ -133,7 +133,9 @@ export default function Cart() {
           <Box m="20px 0">
             <Wrapper>
               <Typography fontWeight="bold">SUBTOTAL</Typography>
-              <Typography fontWeight="bold">$ {totalPrice}</Typography>
+              <Typography fontWeight="bold" sx={{ mr: 1 }}>
+                $ {totalPrice}
+              </Typography>
             </Wrapper>
             <Button
               sx={{
@@ -146,6 +148,7 @@ export default function Cart() {
               }}
               onClick={() => {
                 navigate("/checkout");
+                setOpen(false);
               }}
             >
               CHECKOUT

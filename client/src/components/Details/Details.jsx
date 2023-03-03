@@ -1,43 +1,56 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Checkbox } from "@mui/material";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
 import OrderForm from "./OrderForm";
 import Panels from "./Panels";
 import RelatedItmes from "./RelatedItems";
+import ImageSwiper from "./ImageSwiper";
 
-export default function Details({ item }) {
+export default function Details({ item, items }) {
   return (
     <Box width="90%" m="70px auto">
       <Box
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          alignItems: { sm: "center" },
+          justifyContent: { xs: "space-between", lg: "start" },
         }}
       >
-        {/* Image */}
         <Box
           sx={{
-            width: { xs: 1, sm: "340px", md: "450px" },
-            mr: { sm: "28px", lg: 20 },
+            width: { xs: 1, sm: 340, md: 450 },
+            height: 1,
+            mr: { lg: 20 },
           }}
         >
-          <img
-            alt={item?.name}
-            width="100%"
-            height="100%"
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-            style={{ objectFit: "contain", display: "block" }}
-          />
+          <ImageSwiper item={item} />
         </Box>
-        {/* Product Info */}
         <Box
           sx={{
-            width: { xs: 1, sm: "246px", lg: "350px" },
-            mt: { xs: 5, sm: 0 },
+            width: { xs: 1, sm: 250, md: 350, lg: 450 },
+            mt: { xs: 5, sm: 10, lg: 20 },
           }}
         >
           <Box>
-            <Typography variant="h4" sx={{ fontWeight: "bold", mb: 2 }}>
-              {item?.attributes?.name}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                mb: 2,
+              }}
+            >
+              <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+                {item?.attributes?.name}
+              </Typography>
+              <Checkbox
+                color="secondary"
+                icon={<FavoriteBorder fontSize="large" />}
+                checkedIcon={<Favorite fontSize="large" />}
+              />
+            </Box>
+            <Typography sx={{ fontWeight: "bold", mb: 2 }}>
+              {item?.attributes?.shortDescr}
             </Typography>
             <Typography sx={{ fontSize: 16, fontWeight: "bold", mb: 3 }}>
               ${item?.attributes?.price}
@@ -53,7 +66,7 @@ export default function Details({ item }) {
       <Panels item={item} />
 
       {/* Related Items */}
-      <RelatedItmes item={item} />
+      <RelatedItmes item={item} items={items} />
     </Box>
   );
 }

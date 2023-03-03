@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import ItemDetails from "./views/ItemDetails/ItemDetails";
 import Home from "./views/Home";
 import Checkout from "./views/Checkout/Checkout";
-import Confirmation from "./views/Confirmation/Confirmation";
+import Confirmation from "./views/Checkout/Confirmation";
 import Layout from "./views/Layout/Layout";
 
 const ScrollToTop = () => {
@@ -24,9 +24,8 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/item/:itemId" element={<ItemDetails />} />
-          <Route path="/checkout" element={<Checkout />}>
-            <Route path="checkout/success" element={<Confirmation />} />
-          </Route>
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/success" element={<Confirmation />} />
         </Route>
       </Routes>
     </BrowserRouter>

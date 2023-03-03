@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { Box, Tabs, Tab, Typography, useMediaQuery } from "@mui/material";
+import { Box, Tabs, Tab, Typography } from "@mui/material";
 import Item from "../Item/Item";
 import { Wrapper } from "./ItemsList.styled";
 
-export default function ItemsList({ items }) {
+export default function ItemsList({ items, isLoading }) {
   const [value, setValue] = useState("all");
-
-  const breakPoint = useMediaQuery("(min-width:600px)");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -33,7 +31,7 @@ export default function ItemsList({ items }) {
         value={value}
         onChange={handleChange}
         centered
-        TabIndicatorProps={{ sx: { display: breakPoint ? "block" : "none" } }}
+        TabIndicatorProps={{ sx: { display: { xs: "none", sm: "block" } } }}
         sx={{
           m: "25px",
           "& .MuiTabs-flexContainer": {
@@ -49,7 +47,11 @@ export default function ItemsList({ items }) {
       <Wrapper>
         {value === "all" &&
           items.map((item) => (
-            <Item item={item} key={`${item.name}-${item.id}`} />
+            <Item
+              item={item}
+              isLoading={isLoading}
+              key={`${item.name}-${item.id}`}
+            />
           ))}
         {value === "newArrivals" &&
           newArrivalsItems.map((item) => (

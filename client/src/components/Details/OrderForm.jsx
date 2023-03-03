@@ -28,7 +28,8 @@ export default function OrderForm({ item }) {
 
   const handleAddItem = (value) => {
     const id = cart.map((product) => product.id);
-    if (id.includes(value.item.id)) {
+    const size = cart.map((product) => product.size);
+    if (id.includes(value.item.id) && size.includes(value.item.size)) {
       setMessage((message) => ({
         ...message,
         open: true,
@@ -41,7 +42,7 @@ export default function OrderForm({ item }) {
     setMessage((message) => ({
       ...message,
       open: true,
-
+      severity: "success",
       text: "Item successfully added to cart!",
     }));
   };
@@ -95,6 +96,7 @@ export default function OrderForm({ item }) {
             <Add />
           </IconButton>
         </Box>
+
         <Button
           color="secondary"
           variant="contained"

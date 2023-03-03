@@ -7,6 +7,7 @@ import {
   removeFromCart,
   increaseCount,
   decreaseCount,
+  reset,
 } from "./actions";
 
 const initialState = {
@@ -39,7 +40,8 @@ const cartSlice = createSlice({
           }
           return item;
         });
-      }),
+      })
+      .addCase(reset, (state) => (state = initialState)),
 });
 
 const persistConfig = {

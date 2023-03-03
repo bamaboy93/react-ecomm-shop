@@ -1,13 +1,20 @@
 import { useParams } from "react-router-dom";
 import Details from "../../components/Details/Details";
 import Loader from "../../components/Loader/Loader";
-import { useGetItemQuery } from "../../redux/items-slice";
+import { useGetItemQuery, useGetItemsQuery } from "../../redux/items-slice";
 
 export default function ItemDetails() {
   const { itemId } = useParams();
-  const { data, isLoading } = useGetItemQuery(itemId);
+  const { data: item, isLoading } = useGetItemQuery(itemId);
+  const { data: items } = useGetItemsQuery(1);
 
   return (
-    <>{isLoading ? <Loader /> : <>{data && <Details item={data.data} />}</>}</>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>{item && <Details item={item.data} items={items} />}</>
+      )}
+    </>
   );
 }
