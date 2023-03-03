@@ -12,6 +12,16 @@ import { FreeMode, Thumbs } from "swiper";
 
 export default function ImageSwiper({ item }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const { name, image } = item.attributes;
+  const {
+    data: {
+      attributes: {
+        formats: {
+          medium: { url },
+        },
+      },
+    },
+  } = image;
 
   return (
     <>
@@ -25,28 +35,16 @@ export default function ImageSwiper({ item }) {
         className="mySwiper2"
       >
         <SwiperSlide>
-          <img
-            alt={item?.name}
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-          />
+          <img alt={name} src={`http://localhost:1337${url}`} />
         </SwiperSlide>
         <SwiperSlide>
-          <img
-            alt={item?.name}
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-          />
+          <img alt={name} src={`http://localhost:1337${url}`} />
         </SwiperSlide>
         <SwiperSlide>
-          <img
-            alt={item?.name}
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-          />
+          <img alt={name} src={`http://localhost:1337${url}`} />
         </SwiperSlide>
         <SwiperSlide>
-          <img
-            alt={item?.name}
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-          />
+          <img alt={name} src={`http://localhost:1337${url}`} />
         </SwiperSlide>
       </Swiper>
       <Swiper
@@ -60,28 +58,16 @@ export default function ImageSwiper({ item }) {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img
-            alt={item?.name}
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-          />
+          <img alt={name} src={`http://localhost:1337${url}`} />
         </SwiperSlide>
         <SwiperSlide>
-          <img
-            alt={item?.name}
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-          />
+          <img alt={name} src={`http://localhost:1337${url}`} />
         </SwiperSlide>
         <SwiperSlide>
-          <img
-            alt={item?.name}
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-          />
+          <img alt={name} src={`http://localhost:1337${url}`} />
         </SwiperSlide>
         <SwiperSlide>
-          <img
-            alt={item?.name}
-            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-          />
+          <img alt={name} src={`http://localhost:1337${url}`} />
         </SwiperSlide>
       </Swiper>
     </>

@@ -1,46 +1,28 @@
 import { Box, Typography, Checkbox } from "@mui/material";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
+import { FavoriteBorder, Favorite } from "@mui/icons-material";
 import OrderForm from "./OrderForm";
 import Panels from "./Panels";
 import RelatedItmes from "./RelatedItems";
 import ImageSwiper from "./ImageSwiper";
+import {
+  ImageSwiperWrapper,
+  ImageWrapper,
+  InfoWrapper,
+  MainWrapper,
+  TitleWrapper,
+} from "./Details.styled";
 
 export default function Details({ item, items }) {
   return (
-    <Box width="90%" m="70px auto">
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: { xs: "space-between", lg: "start" },
-        }}
-      >
-        <Box
-          sx={{
-            width: { xs: 1, sm: 340, md: 450 },
-            height: 1,
-            mr: { lg: 20 },
-          }}
-        >
+    <MainWrapper>
+      <ImageWrapper>
+        <ImageSwiperWrapper>
           <ImageSwiper item={item} />
-        </Box>
-        <Box
-          sx={{
-            width: { xs: 1, sm: 250, md: 350, lg: 450 },
-            mt: { xs: 5, sm: 10, lg: 20 },
-          }}
-        >
+        </ImageSwiperWrapper>
+        <InfoWrapper>
           <Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                mb: 2,
-              }}
-            >
-              <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+            <TitleWrapper>
+              <Typography variant="h3" fontWeight="bold">
                 {item?.attributes?.name}
               </Typography>
               <Checkbox
@@ -48,7 +30,7 @@ export default function Details({ item, items }) {
                 icon={<FavoriteBorder fontSize="large" />}
                 checkedIcon={<Favorite fontSize="large" />}
               />
-            </Box>
+            </TitleWrapper>
             <Typography sx={{ fontWeight: "bold", mb: 2 }}>
               {item?.attributes?.shortDescr}
             </Typography>
@@ -59,14 +41,14 @@ export default function Details({ item, items }) {
 
           {/* Form */}
           <OrderForm item={item} />
-        </Box>
-      </Box>
+        </InfoWrapper>
+      </ImageWrapper>
 
       {/* Tabs */}
       <Panels item={item} />
 
       {/* Related Items */}
       <RelatedItmes item={item} items={items} />
-    </Box>
+    </MainWrapper>
   );
 }
