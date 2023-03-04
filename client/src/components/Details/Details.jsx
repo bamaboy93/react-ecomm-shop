@@ -35,7 +35,7 @@ export default function Details({ item, items }) {
               {item?.attributes?.shortDescr}
             </Typography>
             <Typography sx={{ fontSize: 16, fontWeight: "bold", mb: 3 }}>
-              ${item?.attributes?.price}
+              $ {item?.attributes?.price}
             </Typography>
           </Box>
 
